@@ -1,14 +1,16 @@
 import _ from 'lodash';
 
-import { LIKE_OR_DISLIKE_A_MOVIE, REMOVE_A_MOVIE } from '../actions/movies';
-import { movies$ } from '../data/movies';
+import { SAVE_INITIAL_MOVIES_LIST, LIKE_OR_DISLIKE_A_MOVIE, REMOVE_A_MOVIE } from '../actions/movies';
 
 export const initialState = {
-    movies: await movies$,
 };
 
 const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
+        case SAVE_INITIAL_MOVIES_LIST:
+            return {
+                movies: action.movies
+            }
         case LIKE_OR_DISLIKE_A_MOVIE:
             const newMoviesList = _.map(state.movies, movie => {
                 if (movie.id === action.movieId) {
@@ -32,13 +34,11 @@ const reducer = (state = initialState, action = {}) => {
             })
 
             return {
-                ...state,
-                movies: newMoviesList,
+                movies: newMoviesList
             };
 
         case REMOVE_A_MOVIE:
             return {
-                ...state,
                 movies: _.reject(state.movies, movie => movie.id === action.movieId)
             }
         default:
