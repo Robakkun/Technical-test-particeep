@@ -15,7 +15,14 @@ const reducer = (state = initialState, action = {}) => {
             const newMoviesList = _.map(state.movies, movie => {
                 if (movie.id === action.movieId) {
                     if (_.isNil(movie.isLiked)) {
-                        action.liked ? movie.likes += 1 : movie.dislikes += 1;
+                        if (action.liked) {
+                            movie.likes += 1
+                            movie.isLiked = true;
+                        }
+                        else {
+                            movie.dislikes += 1;
+                            movie.isLiked = false;
+                        }
                     }
                     else {
                         if (movie.isLiked && !action.liked) {
