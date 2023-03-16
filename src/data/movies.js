@@ -1,8 +1,18 @@
+import ocean_8 from '../media/ocean_8.jpeg';
+import midnight_sun from '../media/midnight_sun.jpeg';
+import les_indestructibles_2 from '../media/les_indestructibles_2.jpeg';
+import sans_un_bruit from '../media/sans_un_bruit.jpeg';
+import creed_II from '../media/creed_II.jpeg';
+import pulp_fiction from '../media/pulp_fiction.jpeg';
+import seven from '../media/seven.jpeg';
+import inception from '../media/inception.jpeg';
+import gone_girl from '../media/gone_girl.jpeg';
+
 const movies = [
   {
     id: '1',
     title: 'Oceans 8',
-    img: '',
+    img: ocean_8,
     category: 'Comedy',
     likes: 4,
     dislikes: 1,
@@ -11,7 +21,7 @@ const movies = [
   {
     id: '2',
     title: 'Midnight Sun',
-    img: '',
+    img: midnight_sun,
     category: 'Comedy',
     likes: 2,
     dislikes: 0,
@@ -20,7 +30,7 @@ const movies = [
   {
     id: '3',
     title: 'Les indestructibles 2',
-    img: '',
+    img: les_indestructibles_2,
     category: 'Animation',
     likes: 3,
     dislikes: 1,
@@ -29,7 +39,7 @@ const movies = [
   {
     id: '4',
     title: 'Sans un bruit',
-    img: '',
+    img: sans_un_bruit,
     category: 'Thriller',
     likes: 6,
     dislikes: 6,
@@ -38,7 +48,7 @@ const movies = [
   {
     id: '5',
     title: 'Creed II',
-    img: '',
+    img: creed_II,
     category: 'Drame',
     likes: 16,
     dislikes: 2,
@@ -47,7 +57,7 @@ const movies = [
   {
     id: '6',
     title: 'Pulp Fiction',
-    img: '',
+    img: pulp_fiction,
     category: 'Thriller',
     likes: 11,
     dislikes: 3,
@@ -56,7 +66,7 @@ const movies = [
   {
     id: '7',
     title: 'Pulp Fiction',
-    img: '',
+    img: pulp_fiction,
     category: 'Thriller',
     likes: 12333,
     dislikes: 32,
@@ -65,7 +75,7 @@ const movies = [
   {
     id: '8',
     title: 'Seven',
-    img: '',
+    img: seven,
     category: 'Thriller',
     likes: 2,
     dislikes: 1,
@@ -74,7 +84,7 @@ const movies = [
   {
     id: '9',
     title: 'Inception',
-    img: '',
+    img: inception,
     category: 'Thriller',
     likes: 2,
     dislikes: 1,
@@ -83,7 +93,7 @@ const movies = [
   {
     id: '10',
     title: 'Gone Girl',
-    img: '',
+    img: gone_girl,
     category: 'Thriller',
     likes: 22,
     dislikes: 12,
