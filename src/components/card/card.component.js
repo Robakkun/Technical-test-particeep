@@ -34,26 +34,26 @@ const MovieCard = ({ id, title, img, category, likes, dislikes, isLiked }) => {
     }
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
-            <CardMedia
-                component="img"
-                alt={title}
-                height="140"
-                image={img}
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    {title}
-                </Typography>
-                <Typography gutterBottom variant="body1">
-                    {category}
-                </Typography>
-                <RatingBar likes={likes} dislikes={dislikes} />
-            </CardContent>
-            <CardActions>
-                <div className='button-group'>
+        <div className='card'>
+            <Card sx={{ minWidth: 255, maxWidth: 300 }}>
+                <CardMedia
+                    component="img"
+                    alt={title}
+                    height="140"
+                    image={img}
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {title}
+                    </Typography>
+                    <Typography gutterBottom variant="body1">
+                        {category}
+                    </Typography>
+                    <RatingBar likes={likes} dislikes={dislikes} />
+                </CardContent>
+                <CardActions>
                     <ButtonGroup size="small" >
-                        <Button key="deleteMovie" onClick={handleDelete} endIcon={<DeleteIcon />}>
+                        <Button key="deleteMovie" onClick={handleDelete} startIcon={<DeleteIcon />}>
                             Supprimer
                         </Button>
                         <Button key="like" onClick={handleLike}>
@@ -67,9 +67,9 @@ const MovieCard = ({ id, title, img, category, likes, dislikes, isLiked }) => {
                             />
                         </Button>
                     </ButtonGroup>
-                </div>
-            </CardActions>
-        </Card>
+                </CardActions>
+            </Card>
+        </div>
     );
 };
 
