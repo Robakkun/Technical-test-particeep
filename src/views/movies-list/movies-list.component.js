@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import _ from 'lodash';
 import { Row, Col } from 'react-grid-system';
 
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, TablePagination } from "@mui/material";
 
 import { fetchInitialMoviesList } from "../../actions/movies";
 import Card from "../../components/card";
@@ -15,6 +15,10 @@ const MoviesList = () => {
     const dispatch = useDispatch();
 
     const [moviesList, setMoviesList] = useState([]);
+    const [paginatedMoviesList, setPaginatedMoviesList] = useState([]);
+
+    const [moviesPerPage, setMoviesPerPage] = useState(4);
+    const [page, setPage] = useState();
 
     useEffect(() => {
         if (_.isEmpty(moviesState)) {
@@ -22,6 +26,8 @@ const MoviesList = () => {
         }
         else {
             setMoviesList(moviesState);
+            setPaginatedMoviesList(_.slice(moviesState, 0, moviesPerPage));
+            setPage(0);
         }
     }, [moviesState])
 
@@ -37,13 +43,18 @@ const MoviesList = () => {
     const handleFilterChange = (event) => {
         const filteredMovies = _.filter(moviesState, movie => movie.category === event.target.innerText);
 
-        _.isEmpty(event.target.innerText) && _.isEmpty(filteredMovies)
-            ? setMoviesList(moviesState)
-            : setMoviesList(filteredMovies);
+        if (_.isEmpty(event.target.innerText) && _.isEmpty(filteredMovies)) {
+            setMoviesList(moviesState);
+            setPaginatedMoviesList(_.slice(moviesState, 0, moviesPerPage));
+        }
+        else {
+            setMoviesList(filteredMovies);
+            setPaginatedMoviesList(_.slice(filteredMovies, 0, moviesPerPage));
+        }
     }
 
     const getCardList = () => {
-        return _.map(moviesList, movie => {
+        return _.map(paginatedMoviesList, movie => {
             return (
                 <Col xs="content">
                     <Card
@@ -60,6 +71,18 @@ const MoviesList = () => {
             )
         })
     };
+
+    const handleChangePage = (event, newPage) => {
+        const list = _.slice(moviesList, moviesPerPage * newPage, moviesPerPage * (newPage + 1));
+        setPage(newPage)
+        setPaginatedMoviesList(list);
+    }
+
+    const handleChangeMoviesPerPage = (event) => {
+        const list = _.slice(moviesList, 0, event.target.value);
+        setMoviesPerPage(event.target.value);
+        setPaginatedMoviesList(list);
+    }
 
     return (
         <>
@@ -80,6 +103,18 @@ const MoviesList = () => {
                         <Row>
                             {getCardList()}
                         </Row>
+                    </div>
+                    <div className="pagination-container">
+                        <TablePagination
+                            component="div"
+                            count={moviesList.length}
+                            rowsPerPageOptions={[4, 8, 12]}
+                            labelRowsPerPage="Movies per page :"
+                            page={page}
+                            onPageChange={handleChangePage}
+                            rowsPerPage={moviesPerPage}
+                            onRowsPerPageChange={handleChangeMoviesPerPage}
+                        />
                     </div>
                 </>
             }
