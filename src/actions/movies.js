@@ -1,9 +1,7 @@
+//The list of actions that will be called by the middleware and the app's components to update the store
 export const FETCH_INITIAL_MOVIES_LIST = 'FETCH_INITIAL_MOVIES_LIST';
-
 export const SAVE_INITIAL_MOVIES_LIST = 'SAVE_INITIAL_MOVIES_LIST';
-
 export const LIKE_OR_DISLIKE_A_MOVIE = 'LIKE_OR_DISLIKE_A_MOVIE';
-
 export const REMOVE_A_MOVIE = 'REMOVE_A_MOVIE';
 
 export const fetchInitialMoviesList = () => ({

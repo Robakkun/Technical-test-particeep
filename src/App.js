@@ -12,13 +12,15 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <header>
+        <header data-testid='header'>
           <div className='App-header'>
             <img src={logo} height={100} width={100}></img>
             <h2>Particeep Technical Test</h2>
           </div>
         </header>
-        <MoviesList />
+        <div data-testid='movies-list'>
+          <MoviesList />
+        </div>
       </div>
     </Provider>
   );

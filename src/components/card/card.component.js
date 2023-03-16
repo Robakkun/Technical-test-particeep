@@ -21,6 +21,7 @@ import './card.styles.css';
 const MovieCard = ({ id, title, img, category, likes, dislikes, isLiked }) => {
     const dispatch = useDispatch();
 
+    //Here the function that will be called when a specific button is clicked. There are calling update store functions.
     const handleDelete = () => {
         dispatch(removeMovie(id));
     }
@@ -35,33 +36,36 @@ const MovieCard = ({ id, title, img, category, likes, dislikes, isLiked }) => {
 
     return (
         <div className='card'>
-            <Card sx={{ minWidth: 255, maxWidth: 300 }}>
+            <Card data-testid='card' sx={{ minWidth: 255, maxWidth: 300 }}>
                 <CardMedia
+                    data-testid='img'
                     component="img"
                     alt={title}
                     height="140"
                     image={img}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
+                    <Typography data-testid='title' gutterBottom variant="h6" component="div">
                         <strong>{title}</strong>
                     </Typography>
-                    <Typography gutterBottom variant="body1">
+                    <Typography data-testid='category' gutterBottom variant="body1">
                         {category}
                     </Typography>
-                    <RatingBar likes={likes} dislikes={dislikes} />
+                    <div data-testid='rating-bar'>
+                        <RatingBar likes={likes} dislikes={dislikes} />
+                    </div>
                 </CardContent>
                 <CardActions>
                     <ButtonGroup size="small" >
-                        <Button key="deleteMovie" onClick={handleDelete} startIcon={<DeleteIcon />}>
+                        <Button data-testid='delete-button' key="deleteMovie" onClick={handleDelete} startIcon={<DeleteIcon />}>
                             Supprimer
                         </Button>
-                        <Button key="like" onClick={handleLike}>
+                        <Button data-testid='like-button' key="like" onClick={handleLike}>
                             <ThumbUpIcon
                                 color={isLiked ? "success" : "disabled"}
                             />
                         </Button>
-                        <Button key="dislike" onClick={handleDislike}>
+                        <Button data-testid='dislike-button' key="dislike" onClick={handleDislike}>
                             <ThumbDownIcon
                                 color={!isLiked && isLiked !== undefined ? "error" : "disabled"}
                             />

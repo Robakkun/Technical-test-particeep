@@ -13,14 +13,14 @@ const RatingBar = ({ likes, dislikes }) => {
 
     return (
         <>
-            <Typography variant="body2" color="text.secondary">
+            <Typography data-testid='likes-label' variant="body2" color="text.secondary">
                 {"Likes :"}
             </Typography>
-            <Line percent={getLikesPercent()} strokeColor="green" />
-            <Typography variant="body2" color="text.secondary">
+            <Line data-testid='likes-line' percent={getLikesPercent()} strokeColor="green" />
+            <Typography data-testid='dislikes-label' variant="body2" color="text.secondary">
                 {"Dislikes :"}
             </Typography>
-            <Line percent={getDislikesPercent()} strokeColor="red" />
+            <Line data-testid='dislikes-line' percent={getDislikesPercent()} strokeColor="red" />
         </>
     );
 }
