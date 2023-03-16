@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import _ from 'lodash';
 import { Row, Col } from 'react-grid-system';
 
-import { Autocomplete, TextField, TablePagination } from "@mui/material";
+import { Autocomplete, TextField, TablePagination, CircularProgress } from "@mui/material";
 
 import { fetchInitialMoviesList } from "../../actions/movies";
 import Card from "../../components/card";
@@ -13,20 +13,34 @@ import './moviesList.styles.css';
 const MoviesList = () => {
     const moviesState = useSelector((state) => state.moviesReducer.movies);
     const dispatch = useDispatch();
+    const initalStateLoaded = useRef(false);
 
     const [moviesList, setMoviesList] = useState([]);
     const [paginatedMoviesList, setPaginatedMoviesList] = useState([]);
 
     const [moviesPerPage, setMoviesPerPage] = useState(4);
-    const [page, setPage] = useState();
+    const [page, setPage] = useState(0);
 
     useEffect(() => {
-        if (_.isEmpty(moviesState)) {
+        if (_.isEmpty(moviesState) && !initalStateLoaded.current) {
             dispatch(fetchInitialMoviesList());
+            initalStateLoaded.current = true;
+        }
+        else if (!_.isEmpty(moviesState)) {
+            setMoviesList(moviesState);
+
+            const moviesToDisplay = _.slice(moviesState, moviesPerPage * page, moviesPerPage * (page + 1));
+            if (_.isEmpty(moviesToDisplay)) {
+                setPaginatedMoviesList(_.slice(moviesState, moviesPerPage * (page - 1), moviesPerPage * page));
+                setPage(page - 1);
+            }
+            else {
+                setPaginatedMoviesList(moviesToDisplay);
+            }
         }
         else {
-            setMoviesList(moviesState);
-            setPaginatedMoviesList(_.slice(moviesState, 0, moviesPerPage));
+            setMoviesList([]);
+            setPaginatedMoviesList([]);
             setPage(0);
         }
     }, [moviesState])
@@ -86,6 +100,16 @@ const MoviesList = () => {
 
     return (
         <>
+            {_.isEmpty(moviesList) && !initalStateLoaded.current &&
+                <div className="no-movie">
+                    <CircularProgress />
+                </div>
+            }
+            {_.isEmpty(moviesList) && initalStateLoaded.current &&
+                <div className="no-movie">
+                    There is no movie to display
+                </div>
+            }
             {!_.isEmpty(moviesList) &&
                 <>
                     <div className="filter">
