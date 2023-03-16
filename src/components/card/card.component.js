@@ -43,8 +43,8 @@ const MovieCard = ({ id, title, img, category, likes, dislikes, isLiked }) => {
                     image={img}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {title}
+                    <Typography gutterBottom variant="h6" component="div">
+                        <strong>{title}</strong>
                     </Typography>
                     <Typography gutterBottom variant="body1">
                         {category}

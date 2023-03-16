@@ -8,5 +8,6 @@
 }
 
 .pagination-container {
-    margin: 20px 40%
+    width: 400px;
+    margin: 20px auto;
 }
